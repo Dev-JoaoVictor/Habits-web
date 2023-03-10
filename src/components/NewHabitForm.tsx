@@ -19,19 +19,19 @@ export function NewHabitForm() {
 
   async function createNewHabit(event: FormEvent) {
     event.preventDefault();
-    if(!title || weekDays.length === 0 ) {
-      return alert("Formulário está vázio!")
+    if (!title || weekDays.length === 0) {
+      return alert("Formulário está vázio!");
     }
 
-    await api.post('habits', {
+    await api.post("habits", {
       title,
       weekDays,
-    })
+    });
 
-    setTitle('')
-    setWeekDays([])
+    setTitle("");
+    setWeekDays([]);
 
-    alert("Hábito criado com sucesso!")
+    alert("Hábito criado com sucesso!");
   }
 
   function handleToggleWeekDay(weekDay: number) {
@@ -75,7 +75,7 @@ export function NewHabitForm() {
                 handleToggleWeekDay(index);
               }}
             >
-              <div className="h-8 w-8 rounded-lg flex items-center justify-center bg-zinc-900 border-2 border-zinc-800 group-data-[state=checked]:bg-green-500 group-data-[state=checked]:border-green-500">
+              <div className="h-8 w-8 rounded-lg flex items-center justify-center bg-zinc-900 border-2 border-zinc-800 group-data-[state=checked]:bg-green-500 group-data-[state=checked]:border-green-500 transition-colors">
                 <Checkbox.Indicator>
                   <Check size={20} className="white" />
                 </Checkbox.Indicator>
@@ -89,7 +89,8 @@ export function NewHabitForm() {
 
       <button
         type="submit"
-        className=" mt-6 rounded-lg p-4 font-semibold bg-green-600 flex gap-3 hover:bg-green-500 items-center justify-center"
+        className=" mt-6 rounded-lg p-4 font-semibold bg-green-600 flex gap-3
+         hover:bg-green-500 items-center justify-center transition-colors"
       >
         <Check size={20} weight="bold" />
         Confirmar

@@ -6,7 +6,7 @@ import { api } from "../lib/axios";
 
 interface HabitsListProps {
   date: Date;
-  onCompletedChanged: (completed: number) => void
+  onCompletedChanged: (completed: number) => void;
 }
 
 interface HabitsInfo {
@@ -14,7 +14,7 @@ interface HabitsInfo {
     id: string;
     title: string;
     created_at: string;
-  }[],
+  }[];
   completedHabits: string[];
 }
 
@@ -35,7 +35,7 @@ export function HabitsList({ date, onCompletedChanged }: HabitsListProps) {
 
   async function handleToggleHabit(habitId: string) {
     const isHabitAlreadyCompleted =
-    habitsInfo!.completedHabits.includes(habitId);
+      habitsInfo!.completedHabits.includes(habitId);
 
     await api.patch(`/habits/${habitId}/toggle`);
 
@@ -54,11 +54,10 @@ export function HabitsList({ date, onCompletedChanged }: HabitsListProps) {
       completedHabits,
     });
 
-    onCompletedChanged(completedHabits.length)
-    
+    onCompletedChanged(completedHabits.length);
   }
 
-  const isDateInsPast = dayjs(date).endOf('day').isBefore(new Date());
+  const isDateInsPast = dayjs(date).endOf("day").isBefore(new Date());
 
   return (
     <div className="mt-6 flex-col gap-3">
@@ -71,7 +70,7 @@ export function HabitsList({ date, onCompletedChanged }: HabitsListProps) {
             disabled={isDateInsPast}
             className="flex items-center gap-3 mt-3 group"
           >
-            <div className="h-8 w-8 rounded-lg flex items-center justify-center bg-zinc-900 border-2 border-zinc-800 group-data-[state=checked]:bg-green-500 group-data-[state=checked]:border-green-500 ">
+            <div className="h-8 w-8 rounded-lg flex items-center justify-center bg-zinc-900 border-2 border-zinc-800 group-data-[state=checked]:bg-green-500 group-data-[state=checked]:border-green-500 transition-colors ">
               <Checkbox.Indicator>
                 <Check size={20} className="text-white" />
               </Checkbox.Indicator>
