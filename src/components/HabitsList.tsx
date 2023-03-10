@@ -13,7 +13,7 @@ interface HabitsInfo {
     id: string;
     title: string;
     created_at: string;
-  }[];
+  }[],
   completedHabits: string[];
 }
 
@@ -33,10 +33,10 @@ export function HabitsList({ date }: HabitsListProps) {
   }, []);
 
   async function handleToggleHabit(habitId: string) {
-    await api.patch(`/habits${habitId}/toggle`);
-
     const isHabitAlreadyCompleted =
-      habitsInfo!.completedHabits.includes(habitId);
+    habitsInfo!.completedHabits.includes(habitId);
+
+    await api.patch(`/habits/${habitId}/toggle`);
 
     let completedHabits: string[] = [];
 
@@ -52,9 +52,10 @@ export function HabitsList({ date }: HabitsListProps) {
       possibleHabits: habitsInfo!.possibleHabits,
       completedHabits,
     });
+    
   }
 
-  const isDateInsPast = dayjs(date).endOf("day").isBefore(new Date());
+  const isDateInsPast = dayjs(date).endOf('day').isBefore(new Date());
 
   return (
     <div className="mt-6 flex-col gap-3">
@@ -62,9 +63,7 @@ export function HabitsList({ date }: HabitsListProps) {
         return (
           <Checkbox.Root
             key={habit.id}
-            onCheckedChange={() => {
-              handleToggleHabit(habit.id);
-            }}
+            onCheckedChange={() => handleToggleHabit(habit.id)}
             checked={habitsInfo.completedHabits.includes(habit.id)}
             disabled={isDateInsPast}
             className="flex items-center gap-3 mt-3 group"
